@@ -1,6 +1,7 @@
-import discord, os
+import discord, os, asyncio
 from dotenv import load_dotenv
 from discord import app_commands
+from discord.ext import commands
 
 load_dotenv()
 
@@ -8,16 +9,25 @@ TOKEN = os.getenv('TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
-slash = app_commands.CommandTree(client)
+bot = commands.Bot(command_prefix='!', intents=intents, application_id='991731064026448043')
 
-@client.event
+@bot.event
 async def on_ready():
-    await slash.sync(guild=discord.Object(id=925142628847218698))
-    print(f"Ready for action! Logged in as {client.user}")
+    print(f"Ready for action! Logged in as {bot.user}")
 
-@slash.command(name = "test", description = "testing", guild=discord.Object(id=925142628847218698))
-async def first_command(interaction):
-    await interaction.response.send_message("Hi there!")
+@bot.command
+async def sync(ctx):
+    fmt = await ctx.bot.tree.sync(guild = ctx.guild)
+    await ctx.send(f"Refreshed {len(fmt)} commands.")
 
-client.run(TOKEN)
+
+async def load():
+    for file in os.listdir('./cogs'):
+        if file.endswith('.py'):
+            await bot.load_extension(f'cogs.{file[:-3]}')
+
+async def main():
+    await load()
+    await bot.start(TOKEN)
+
+asyncio.run(main())
