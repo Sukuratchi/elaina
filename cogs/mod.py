@@ -13,6 +13,10 @@ class Mod(commands.Cog):
     @app_commands.command(name="ban", description="Ban command")
     @app_commands.checks.has_permissions(ban_members=True)
     async def ban(self, interaction: discord.Interaction, member: discord.Member, reason: str):
+        myguild = self.bot.get_guild(850093371073757194)
+        modlog = myguild.get_channel(1177953545681649714)
+        await modlog.send(f"{member} has been banned!")
+
         await member.ban(reason=reason)
         await interaction.response.send_message(f"Done! Banned {member}", ephemeral=True)
 
@@ -24,6 +28,10 @@ class Mod(commands.Cog):
     @app_commands.command(name="kick", description="Kick command")
     @app_commands.checks.has_permissions(kick_members=True)
     async def kick(self, interaction: discord.Interaction, member: discord.Member, reason: str):
+        myguild = self.bot.get_guild(850093371073757194)
+        modlog = myguild.get_channel(1177953545681649714)
+        await modlog.send(f"{member} has been kicked out!")
+
         await member.kick(reason=reason)
         await interaction.response.send_message(f"Done! Kicked {member}", ephemeral=True)
 
