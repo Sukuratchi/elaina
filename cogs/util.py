@@ -21,15 +21,14 @@ class Util(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        print(f"{member} joined")
         responses = [
             f"Lets all welcome <@!{member.id}> to the server!",
             f"Hey look, <@!{member.id}> has joined the server!",
             f"Hi there <@!{member.id}>! Hope you enjoy your stay here."
         ]
         myguild = self.bot.get_guild(850093371073757194)
-        myguildlogchannel = myguild.get_channel(865340222581899284)
-        await myguildlogchannel.send(random.choice(responses))
+        welcome = myguild.get_channel(865340222581899284)
+        await welcome.send(random.choice(responses))
 
 async def setup(bot):
     await bot.add_cog(Util(bot), guilds=[discord.Object(id=850093371073757194)])
