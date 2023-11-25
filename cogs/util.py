@@ -1,4 +1,4 @@
-import discord
+import discord, random
 from discord import app_commands
 from discord.ext import commands
 
@@ -18,6 +18,18 @@ class Util(commands.Cog):
     @app_commands.command(name='ping', description='Checks bot ping')
     async def ping(self, interaction: discord.Interaction):
         await interaction.response.send_message(f'Pong! Response is at a blazing fast {round(self.bot.latency * 1000)}ms')
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        print(f"{member} joined")
+        responses = [
+            f"Lets all welcome <@!{member.id}> to the server!",
+            f"Hey look, <@!{member.id}> has joined the server!",
+            f"Hi there <@!{member.id}>! Hope you enjoy your stay here."
+        ]
+        myguild = self.bot.get_guild(850093371073757194)
+        myguildlogchannel = myguild.get_channel(865340222581899284)
+        await myguildlogchannel.send(random.choice(responses))
 
 async def setup(bot):
     await bot.add_cog(Util(bot), guilds=[discord.Object(id=850093371073757194)])
