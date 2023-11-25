@@ -7,7 +7,7 @@ This is a "private" repo, so all rights reserved (no, you may not fork it and us
 
 - [ ] Add Twitch live support for my channel
 - [ ] Add public mod log support
-- [ ] Add kick/ban support with reasoning that sends out a public mod log
+- [X] Add kick/ban support with reasoning that sends out a public mod log
 - [ ] Maybe add a schedule thingy for twitch stuff? Could be like when the next stream is planned, whatever. Members of the server can then use something like /schedule to see if I have anything planned and at what time
 - [ ] Support for better twitter, instagram and tiktok embeds
 - [ ] The ability for music links to have many streaming services shown (you send an apple music link, you get an option to also use spotify or tidal for example)
