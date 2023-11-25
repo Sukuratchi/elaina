@@ -14,10 +14,21 @@ class Mod(commands.Cog):
     @app_commands.checks.has_permissions(ban_members=True)
     async def ban(self, interaction: discord.Interaction, member: discord.Member, reason: str):
         await member.ban(reason=reason)
-        await interaction.response.send_message(f"Done!", ephemeral=True)
+        await interaction.response.send_message(f"Done! Banned {member}", ephemeral=True)
 
     @ban.error
     async def on_ban_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+        if isinstance(error, app_commands.MissingPermissions):
+            await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
+
+    @app_commands.command(name="kick", description="Kick command")
+    @app_commands.checks.has_permissions(kick_members=True)
+    async def kick(self, interaction: discord.Interaction, member: discord.Member, reason: str):
+        await member.kick(reason=reason)
+        await interaction.response.send_message(f"Done! Kicked {member}", ephemeral=True)
+
+    @kick.error
+    async def on_kick_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
         if isinstance(error, app_commands.MissingPermissions):
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
