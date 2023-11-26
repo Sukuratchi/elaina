@@ -12,7 +12,7 @@ class Mod(commands.Cog):
 
     @app_commands.command(name = "ban", description = "Ban command")
     @app_commands.checks.has_permissions(ban_members = True)
-    async def ban(self, interaction: discord.Interaction, member: discord.Member, reason: str):
+    async def ban(self, interaction: discord.Interaction, member: discord.Member, reason: str = "None given"):
         embed = discord.Embed(
             title=f"Member banned!", color=discord.Color.blurple())
         embed.set_thumbnail(url=member.display_avatar)
@@ -34,7 +34,7 @@ class Mod(commands.Cog):
 
     @app_commands.command(name="kick", description="Kick command")
     @app_commands.checks.has_permissions(kick_members=True)
-    async def kick(self, interaction: discord.Interaction, member: discord.Member, reason: str):
+    async def kick(self, interaction: discord.Interaction, member: discord.Member, reason: str = "None given"):
         embed = discord.Embed(
             title=f"Member kicked!", color=discord.Color.blurple())
         embed.set_thumbnail(url=member.display_avatar)
