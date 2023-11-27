@@ -43,7 +43,7 @@ async def sync(interaction: discord.Interaction):
     fmt = await bot.tree.sync(guild = MY_GUILD)
     await interaction.response.send_message(f"Refreshed {len(fmt)} commands.", ephemeral = True)
 
-async def load():
+async def loadCogs():
     for file in os.listdir('./cogs'):
         if file.endswith('.py'):
             loadedCogs.append(file[:-3])
@@ -59,8 +59,16 @@ async def unload(interaction: discord.Interaction, cog: str):
     loadedCogs.remove(cog)
     await interaction.response.send_message(f"Unloaded {cog}", ephemeral = True)
 
+@bot.tree.command(name = 'load', description = 'Loads a cog')
+async def load(interaction: discord.Interaction, cog: str):
+    for file in os.listdir('./cogs'):
+        if file.startswith(cog):
+            loadedCogs.append(file[:-3])
+            await bot.load_extension(f'cogs.{file[:-3]}')
+            await interaction.response.send_message(f"Loaded {cog}", ephemeral = True)
+
 async def main():
-    await load()
+    await loadCogs()
     await bot.start(TOKEN)
 
 asyncio.run(main())
