@@ -51,7 +51,6 @@ def checkIfLive(channel):
             game = data['game_name']
             thumbnail_url = data['thumbnail_url']
             stream = Stream(title, streamer, game, thumbnail_url)
-            #stream = Stream(title, streamer, game)
             return stream
         else:
             return "OFFLINE"
@@ -69,25 +68,20 @@ class TwitchTrack(commands.Cog):
 
     @tasks.loop(seconds = 10)
     async def twitchNotif(self):
-        #print("Running loop")
         global isLive
         stream = checkIfLive("sukuratchiii")
         if stream != "OFFLINE":
-            #print("Checking if stream is live")
             if isLive == False:
                 isLive = True
                 myguild = self.bot.get_guild(850093371073757194)
                 modlog = myguild.get_channel(1177953545681649714)
                 await modlog.send("_Sukuratchi is live!")
-                #print("Channel is live!")
         else:
-            #print("Checking if stream is not live")
             if isLive == True:
                 isLive = False
                 myguild = self.bot.get_guild(850093371073757194)
                 modlog = myguild.get_channel(1177953545681649714)
                 await modlog.send("_Sukuratchi went offline.")
-                #print("Channel is not live!")
 
 async def setup(bot):
     await bot.add_cog(TwitchTrack(bot), guilds=[discord.Object(id=850093371073757194)])
