@@ -1,6 +1,7 @@
 import discord, os, asyncio, random
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
+from discord import app_commands
 
 load_dotenv()
 
@@ -33,7 +34,7 @@ async def change_status():
     else:
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
 
-@bot.command
+@bot.command()
 async def sync(ctx):
     fmt = await ctx.bot.tree.sync(guild = ctx.guild)
     await ctx.send(f"Refreshed {len(fmt)} commands.")
