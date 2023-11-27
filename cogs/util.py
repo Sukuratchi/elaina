@@ -11,11 +11,6 @@ class Util(commands.Cog):
     async def on_ready(self):
         print("Utility cog loaded!")
 
-    @commands.command()
-    async def sync(self, ctx) -> None:
-        fmt = await ctx.bot.tree.sync(guild=ctx.guild)
-        await ctx.send(f"Refreshed {len(fmt)} commands!")
-
     @app_commands.command(name='ping', description='Checks bot ping')
     async def ping(self, interaction: discord.Interaction):
         await interaction.response.send_message(f'Pong! Response is at a blazing fast {round(self.bot.latency * 1000)}ms')
