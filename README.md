@@ -15,4 +15,4 @@ This is a "private" repo, so all rights reserved (no, you may not fork it and us
 - [ ] Tracking for people whitelisted on a minecraft server as well as a "whitelist request notification" thingy that you can use to quickly whitelist someone and add their info to a spreadsheet
 - [ ] Notify if someones twitch sub runs out and they loose their role
 - [ ] Add functionality that allows you to check if an mc server is up
-- [ ] Add the ability to "live reload" cogs so that I don't have to kill the entire bot and fully restart it
+- [X] Add the ability to "live reload" cogs so that I don't have to kill the entire bot and fully restart it
