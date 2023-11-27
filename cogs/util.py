@@ -105,18 +105,18 @@ class Util(commands.Cog):
         welcome = myguild.get_channel(865340222581899284)
         await welcome.send(random.choice(responses))
 
-    @tasks.loop(seconds = 30)
+    @tasks.loop(seconds = 10)
     async def twitchNotif(self):
         #print("Running loop")
         global isLive
-        stream = checkIfLive("SquChan")
+        stream = checkIfLive("sukuratchiii")
         if stream != "OFFLINE":
             #print("Checking if stream is live")
             if isLive == False:
                 isLive = True
                 myguild = self.bot.get_guild(850093371073757194)
                 modlog = myguild.get_channel(1177953545681649714)
-                await modlog.send("Squ is live!")
+                await modlog.send("_Sukuratchi is live!")
                 #print("Channel is live!")
         else:
             #print("Checking if stream is not live")
@@ -124,7 +124,7 @@ class Util(commands.Cog):
                 isLive = False
                 myguild = self.bot.get_guild(850093371073757194)
                 modlog = myguild.get_channel(1177953545681649714)
-                await modlog.send("SquChan is not live!")
+                await modlog.send("_Sukuratchi went offline.")
                 #print("Channel is not live!")
         
 async def setup(bot):
