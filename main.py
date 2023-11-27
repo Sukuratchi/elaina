@@ -67,6 +67,11 @@ async def load(interaction: discord.Interaction, cog: str):
             await bot.load_extension(f'cogs.{file[:-3]}')
             await interaction.response.send_message(f"Loaded {cog}", ephemeral = True)
 
+@bot.tree.command(name = 'reload', description = 'Reloads a cog')
+async def reload(interaction: discord.Interaction, cog: str):
+    await bot.reload_extension(f"cogs.{cog}")
+    await interaction.response.send_message(f"Reloaded {cog}!", ephemeral = True)
+
 async def main():
     await loadCogs()
     await bot.start(TOKEN)
