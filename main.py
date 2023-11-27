@@ -46,14 +46,18 @@ async def sync(interaction: discord.Interaction):
 async def load():
     for file in os.listdir('./cogs'):
         if file.endswith('.py'):
-            global loadedCogs
             loadedCogs.append(file[:-3])
             await bot.load_extension(f'cogs.{file[:-3]}')
 
 @bot.tree.command(name='loaded', description='Checks what cogs are loaded')
 async def loaded(interaction: discord.Interaction):
-    global loadedCogs
     await interaction.response.send_message(f"{loadedCogs} are loaded!", ephemeral = True)
+
+@bot.tree.command(name = 'unload', description = 'unloads a cog')
+async def unload(interaction: discord.Interaction, cog: str):
+    await bot.unload_extension(f"cogs.{cog}")
+    loadedCogs.remove(cog)
+    await interaction.response.send_message(f"Unloaded {cog}", ephemeral = True)
 
 async def main():
     await load()
