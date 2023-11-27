@@ -9,6 +9,10 @@ class Socials(commands.Cog):
         self.pixiv_pattern = re.compile(r"(https:\/\/(www.)?(pixiv)\.net\/en\/artworks\/[0-9]+)")
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        print("Fix links cog loaded!")
+
+    @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         message_content = message.content.strip("<>")
         if twitter_match := self.twitter_pattern.search(message_content):
