@@ -1,4 +1,4 @@
-import discord, re, os, asyncio
+import discord, re, asyncio
 from discord.ext import commands
 
 class Socials(commands.Cog):
@@ -49,4 +49,4 @@ class Socials(commands.Cog):
         await message.edit(suppress=True)
 
 async def setup(bot):
-    await bot.add_cog(Socials(bot), guilds=[discord.Object(id=850093371073757194)])
+    await bot.add_cog(Socials(bot), guilds=[discord.Object(id=1116469018019233812)])

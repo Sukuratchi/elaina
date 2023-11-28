@@ -1,6 +1,6 @@
 import discord, random, os, platform, psutil
 from discord import app_commands
-from discord.ext import commands, tasks
+from discord.ext import commands
 from math import floor
 
 class Util(commands.Cog):
@@ -34,11 +34,13 @@ class Util(commands.Cog):
         responses = [
             f"Lets all welcome <@!{member.id}> to the server!",
             f"Hey look, <@!{member.id}> has joined the server!",
-            f"Hi there <@!{member.id}>! Hope you enjoy your stay here."
+            f"Hi there <@!{member.id}>! Hope you enjoy your stay here.",
+            f"Welcome to the server, <@!{member.id}>!",
+            f"A new face, <@!{member.id}>, has arrived. Welcome in!"
         ]
-        myguild = self.bot.get_guild(850093371073757194)
-        welcome = myguild.get_channel(865340222581899284)
+        myguild = self.bot.get_guild(1116469018019233812)
+        welcome = myguild.get_channel(1178850385901932564)
         await welcome.send(random.choice(responses))
         
 async def setup(bot):
-    await bot.add_cog(Util(bot), guilds=[discord.Object(id=850093371073757194)])
+    await bot.add_cog(Util(bot), guilds=[discord.Object(id=1116469018019233812)])

@@ -7,13 +7,13 @@ load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 loadedCogs = []
-MY_GUILD = discord.Object(id=850093371073757194)
+MY_GUILD = discord.Object(id=1116469018019233812)
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 intents.messages = True
-bot = commands.Bot(command_prefix='!', intents=intents, application_id='991731064026448043', guilds=[discord.Object(id=850093371073757194)])
+bot = commands.Bot(command_prefix='!', intents=intents, application_id='991731064026448043', guilds=[discord.Object(id=1116469018019233812)])
 
 @bot.event
 async def on_ready():
@@ -39,7 +39,7 @@ async def change_status():
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
 
 @bot.tree.command(name='sync', description='syncs commands from cogs')
-@app_commands.checks.has_role(850093685588885544)
+@app_commands.checks.has_role(1120840113170157599)
 async def sync(interaction: discord.Interaction):
     fmt = await bot.tree.sync(guild = MY_GUILD)
     await interaction.response.send_message(f"Refreshed {len(fmt)} commands.", ephemeral = True)
@@ -50,7 +50,7 @@ async def on_sync_error(interaction: discord.Interaction, error: app_commands.Ap
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
 @bot.tree.command(name='loaded', description='Checks what cogs are loaded')
-@app_commands.checks.has_role(850093685588885544)
+@app_commands.checks.has_role(1120840113170157599)
 async def loaded(interaction: discord.Interaction):
     await interaction.response.send_message(f"{loadedCogs} are loaded!", ephemeral = True)
 
@@ -60,7 +60,7 @@ async def on_sync_error(interaction: discord.Interaction, error: app_commands.Ap
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
 @bot.tree.command(name = 'unload', description = 'unloads a cog')
-@app_commands.checks.has_role(850093685588885544)
+@app_commands.checks.has_role(1120840113170157599)
 async def unload(interaction: discord.Interaction, cog: str):
     await bot.unload_extension(f"cogs.{cog}")
     loadedCogs.remove(cog)
@@ -72,7 +72,7 @@ async def on_sync_error(interaction: discord.Interaction, error: app_commands.Ap
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
 @bot.tree.command(name = 'load', description = 'Loads a cog')
-@app_commands.checks.has_role(850093685588885544)
+@app_commands.checks.has_role(1120840113170157599)
 async def load(interaction: discord.Interaction, cog: str):
     for file in os.listdir('./cogs'):
         if file.startswith(cog):
@@ -86,7 +86,7 @@ async def on_sync_error(interaction: discord.Interaction, error: app_commands.Ap
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
 @bot.tree.command(name = 'reload', description = 'Reloads a cog')
-@app_commands.checks.has_role(850093685588885544)
+@app_commands.checks.has_role(1120840113170157599)
 async def reload(interaction: discord.Interaction, cog: str):
     await bot.reload_extension(f"cogs.{cog}")
     await interaction.response.send_message(f"Reloaded {cog}!", ephemeral = True)

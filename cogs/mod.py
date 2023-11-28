@@ -20,8 +20,8 @@ class Mod(commands.Cog):
         embed.add_field(name = "Performed by", value=f"<@!{interaction.user.id}>")
         embed.add_field(name = "Reason", value = reason)
 
-        myguild = self.bot.get_guild(850093371073757194)
-        modlog = myguild.get_channel(1177953545681649714)
+        myguild = self.bot.get_guild(1116469018019233812)
+        modlog = myguild.get_channel(1178849788440092683)
         await modlog.send(embed=embed)
 
         await member.ban(reason=reason)
@@ -42,8 +42,8 @@ class Mod(commands.Cog):
         embed.add_field(name = "Performed by", value=f"<@!{interaction.user.id}>")
         embed.add_field(name = "Reason", value = reason)
 
-        myguild = self.bot.get_guild(850093371073757194)
-        modlog = myguild.get_channel(1177953545681649714)
+        myguild = self.bot.get_guild(1116469018019233812)
+        modlog = myguild.get_channel(1178849788440092683)
         await modlog.send(embed=embed)
 
         await member.kick(reason=reason)
@@ -55,4 +55,4 @@ class Mod(commands.Cog):
             await interaction.response.send_message(f"You're not allowed to run this command. Sorry!", ephemeral=True)
 
 async def setup(bot):
-    await bot.add_cog(Mod(bot), guilds=[discord.Object(id=850093371073757194)])
+    await bot.add_cog(Mod(bot), guilds=[discord.Object(id=1116469018019233812)])

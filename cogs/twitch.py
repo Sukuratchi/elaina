@@ -73,15 +73,15 @@ class TwitchTrack(commands.Cog):
         if stream != "OFFLINE":
             if isLive == False:
                 isLive = True
-                myguild = self.bot.get_guild(850093371073757194)
-                modlog = myguild.get_channel(1177953545681649714)
-                await modlog.send("_Sukuratchi is live!")
+                myguild = self.bot.get_guild(1116469018019233812)
+                live = myguild.get_channel(1120845503941320776)
+                await live.send("_Sukuratchi is live! [Come watch here!](https://twitch.tv/sukuratchiii)")
         else:
             if isLive == True:
                 isLive = False
-                myguild = self.bot.get_guild(850093371073757194)
-                modlog = myguild.get_channel(1177953545681649714)
-                await modlog.send("_Sukuratchi went offline.")
+                #myguild = self.bot.get_guild(850093371073757194)
+                #live = myguild.get_channel(1177953545681649714)
+                #await live.send("_Sukuratchi went offline.")
 
 async def setup(bot):
-    await bot.add_cog(TwitchTrack(bot), guilds=[discord.Object(id=850093371073757194)])
+    await bot.add_cog(TwitchTrack(bot), guilds=[discord.Object(id=1116469018019233812)])
