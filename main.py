@@ -65,6 +65,7 @@ async def unload(interaction: discord.Interaction, cog: str):
     await bot.unload_extension(f"cogs.{cog}")
     loadedCogs.remove(cog)
     await interaction.response.send_message(f"Unloaded {cog}", ephemeral = True)
+    print(f"Unloaded {cog}")
 
 @unload.error
 async def on_sync_error(interaction: discord.Interaction, error: app_commands.AppCommandError):
@@ -79,6 +80,7 @@ async def load(interaction: discord.Interaction, cog: str):
             loadedCogs.append(file[:-3])
             await bot.load_extension(f'cogs.{file[:-3]}')
             await interaction.response.send_message(f"Loaded {cog}", ephemeral = True)
+            print(f"Loaded {cog}")
 
 @load.error
 async def on_sync_error(interaction: discord.Interaction, error: app_commands.AppCommandError):
@@ -90,6 +92,7 @@ async def on_sync_error(interaction: discord.Interaction, error: app_commands.Ap
 async def reload(interaction: discord.Interaction, cog: str):
     await bot.reload_extension(f"cogs.{cog}")
     await interaction.response.send_message(f"Reloaded {cog}!", ephemeral = True)
+    print(f"Reloaded {cog}")
 
 @reload.error
 async def on_sync_error(interaction: discord.Interaction, error: app_commands.AppCommandError):
