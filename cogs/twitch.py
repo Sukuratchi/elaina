@@ -1,4 +1,4 @@
-import discord, os, requests
+import discord, os, requests, asyncio
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
@@ -66,16 +66,19 @@ class TwitchTrack(commands.Cog):
         self.twitchNotif.start()
         print("Twitch tracking cog loaded!")
 
-    @tasks.loop(seconds = 10)
+    @tasks.loop(seconds = 30)
     async def twitchNotif(self):
         global isLive
         stream = checkIfLive("sukuratchiii")
         if stream != "OFFLINE":
-            if isLive == False:
-                isLive = True
-                myguild = self.bot.get_guild(1116469018019233812)
-                live = myguild.get_channel(1120845503941320776)
-                await live.send("_Sukuratchi is live! [Come watch here!](https://twitch.tv/sukuratchiii)")
+            asyncio.sleep(5)
+            if stream != "OFFLINE":
+                if isLive == False:
+                    isLive = True
+                    #myguild = self.bot.get_guild(1116469018019233812)
+                    #live = myguild.get_channel(1120845503941320776)
+                    #await live.send("_Sukuratchi is live! [Come watch here!](https://twitch.tv/sukuratchiii)")
+                    print("Live notification")
         else:
             if isLive == True:
                 isLive = False
