@@ -30,6 +30,11 @@ class Util(commands.Cog):
 
         await interaction.response.send_message(embed=embed)
 
+    @app_commands.command(name = 'avatar', description = 'Gets your own or a users avatar')
+    async def avatar(self, interaction: discord.Interaction, member: discord.Member):
+        avatar = member.display_avatar
+        await interaction.response.send_message(f"Here's your [avatar!]({member.display_avatar})")
+
     @tasks.loop(seconds=45)
     async def change_status(self):
         statusType = random.randint(0, 5)
