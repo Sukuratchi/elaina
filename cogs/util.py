@@ -33,7 +33,17 @@ class Util(commands.Cog):
     @app_commands.command(name = 'avatar', description = 'Gets your own or a users avatar')
     async def avatar(self, interaction: discord.Interaction, member: discord.Member):
         avatar = member.display_avatar
-        await interaction.response.send_message(f"Here's your [avatar!]({member.display_avatar})")
+        await interaction.response.send_message(f"Here's your [avatar!]({avatar})")
+
+    @app_commands.command(name = 'banner', description = 'Gets your own or a users avatar')
+    async def banner(self, interaction: discord.Interaction, member: discord.Member):
+        user = await self.bot.fetch_user(member.id)
+        banner = user.banner.url
+        await interaction.response.send_message(f"Here's your [banner!]({banner})")
+
+    @banner.error
+    async def on_banner_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+        await interaction.response.send_message("This command failed! Try making sure you have a banner (you need regular nitro for this (not basic)).\nIf you're sure that the user has a banner, please ping _Sukuratchi about this", ephemeral=True)
 
     @tasks.loop(seconds=45)
     async def change_status(self):
