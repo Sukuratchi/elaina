@@ -9,8 +9,26 @@ class Util(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
-        self.change_status.start
+        self.change_status.start()
         print("Utility cog loaded!")
+
+    @tasks.loop(seconds=30)
+    async def change_status(self):
+        statusType = random.randint(0, 6)
+        if statusType == 0:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="some anime"))
+        elif statusType == 1:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="the rain outside"))
+        elif statusType == 2:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="vtubers"))
+        elif statusType == 3:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="booba"))
+        elif statusType == 4:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ"))
+        elif statusType == 5:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="smol crimes"))
+        else:
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
 
     @app_commands.command(name='ping', description='Checks bot ping')
     async def ping(self, interaction: discord.Interaction):
@@ -44,22 +62,6 @@ class Util(commands.Cog):
     @banner.error
     async def on_banner_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
         await interaction.response.send_message("This command failed! Try making sure you have a banner (you need regular nitro for this (not basic)).\nIf you're sure that the user has a banner, please ping _Sukuratchi about this", ephemeral=True)
-
-    @tasks.loop(seconds=45)
-    async def change_status(self):
-        statusType = random.randint(0, 5)
-        if statusType == 0:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="some anime"))
-        elif statusType == 1:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="the rain outside"))
-        elif statusType == 2:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="vtubers"))
-        elif statusType == 3:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="booba"))
-        elif statusType == 4:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ"))
-        else:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
         
 async def setup(bot):
     await bot.add_cog(Util(bot), guilds=[discord.Object(id=1116469018019233812)])
