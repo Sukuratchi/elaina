@@ -15,20 +15,21 @@ class Util(commands.Cog):
     @tasks.loop(seconds=30)
     async def change_status(self):
         statusType = random.randint(0, 6)
-        if statusType == 0:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="some anime"))
-        elif statusType == 1:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="the rain outside"))
-        elif statusType == 2:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="vtubers"))
-        elif statusType == 3:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="booba"))
-        elif statusType == 4:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ"))
-        elif statusType == 5:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="smol crimes"))
-        else:
-            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
+        match statusType:
+            case 0:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="some anime"))        
+            case 1:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="the rain outside"))
+            case 2:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="vtubers"))
+            case 3:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="booba"))
+            case 4:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ ᵇᵉᵃⁿ"))
+            case 5:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="smol crimes"))
+            case 6:
+                await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="TF2"))
 
     @app_commands.command(name='ping', description='Checks bot ping')
     async def ping(self, interaction: discord.Interaction):
