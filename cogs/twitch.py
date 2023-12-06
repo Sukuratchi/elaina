@@ -71,13 +71,13 @@ class TwitchTrack(commands.Cog):
         global isLive
         stream = checkIfLive("sukuratchiii")
         if stream != "OFFLINE":
-            asyncio.sleep(5)
+            await asyncio.sleep(5)
             if stream != "OFFLINE":
                 if isLive == False:
                     isLive = True
-                    #myguild = self.bot.get_guild(1116469018019233812)
-                    #live = myguild.get_channel(1120845503941320776)
-                    #await live.send("_Sukuratchi is live! [Come watch here!](https://twitch.tv/sukuratchiii)")
+                    myguild = self.bot.get_guild(1116469018019233812)
+                    live = myguild.get_channel(1120845503941320776)
+                    await live.send("_Sukuratchi is live! [Come watch here!](https://twitch.tv/sukuratchiii)")
                     print("Live notification")
         else:
             if isLive == True:
